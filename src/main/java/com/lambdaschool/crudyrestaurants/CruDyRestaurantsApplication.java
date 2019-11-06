@@ -1,0 +1,15 @@
+package com.lambdaschool.crudyrestaurants;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CruDyRestaurantsApplication
+{
+
+    public static void main(String[] args)
+    {
+        SpringApplication.run(CruDyRestaurantsApplication.class, args);
+    }
+
+}
