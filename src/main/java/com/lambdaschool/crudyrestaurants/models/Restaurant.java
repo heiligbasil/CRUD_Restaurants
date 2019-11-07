@@ -8,6 +8,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
+// @JsonIgnoreProperties({"hasvalueforseatcapacity", "telephone"})
+@JsonIgnoreProperties("hasvalueforseatcapacity")
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +22,9 @@ public class Restaurant {
     private String city;
     private String state;
     private String telephone;
+
+    @Transient
+    public boolean hasvalueforseatcapacity = false;
     private int seatcapacity;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -97,6 +102,7 @@ public class Restaurant {
     }
 
     public void setSeatcapacity(int seatcapacity) {
+        hasvalueforseatcapacity = true; // int, long, double, boolean
         this.seatcapacity = seatcapacity;
     }
 
@@ -114,5 +120,15 @@ public class Restaurant {
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
+    }
+
+    public void addPayment(Payment payment) {
+        payments.add(payment);
+        payment.getRestaurants().add(this);
+    }
+
+    public void removePayment(Payment payment) {
+        payments.remove(payment);
+        payment.getRestaurants().remove(this);
     }
 }

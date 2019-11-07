@@ -14,4 +14,10 @@ public interface RestaurantService {
     List<Restaurant> findByState(String state);
 
     List<Restaurant> findByNameLike(String thename);
+
+    Restaurant save (Restaurant restaurant);
+
+    Restaurant update(Restaurant restaurant, long id);
+
+    void delete(long id);
 }
